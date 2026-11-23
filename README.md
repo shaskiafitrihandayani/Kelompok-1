@@ -35,11 +35,11 @@ Sistem pemantau suhu dan kelembapan udara ini bekerja dalam satu rantai data ter
 
 | Tahap | Bukti | Tanggal |
 | :--- | :--- | :--- |
-| **Tahap 1: RPI ke Internet** (`rpi-kel1` terhubung Pi Connect, konfigurasi IP, `ufw` aktif, dan uji `ping` berhasil) | • [`01-pi-connect-aktif.jpg`](docs/tahap1_rpi_piconnect/01-pi-connect-aktif.jpg)<br>• [`02-ip-address.png`](docs/tahap1_rpi_piconnect/02-ip-address.png)<br>• [`03-ufw-status.png`](docs/tahap1_rpi_piconnect/03-ufw-status.png)<br>• [`04-ping-internet.png`](docs/tahap1_rpi_piconnect/04-ping-internet.png) | 2026-11-15 |
-| **Tahap 2: Sensor ke RPI** (Rangkaian fisik DHT22 pada ESP32 & pembacaan stabil di Serial Monitor tanpa `nan`) | • [`01-rangkaian-esp32-dht22.jpeg`](docs/tahap2-sensor-esp32/01-rangkaian-esp32-dht22.jpeg)<br>• [`02-serial-monitor-ok.png`](docs/tahap2-sensor-esp32/02-serial-monitor-ok.png) | 2026-11-17 |
-| **Tahap 3a: Broker MQTT** (`mosquitto_sub -t 'iot/#'` menerima pesan JSON dari ESP32 dengan autentikasi user & password) | • [`01-mosquitto-sub-terima-data.jpeg`](docs/tahap3a-broker-mqtt/01-mosquitto-sub-terima-data.jpeg) | 2026-11-19 |
-| **Tahap 3b: Akses Internet** (URL publik Cloudflare Tunnel terbuka dari jaringan data seluler & wajib login) | • [`01-akses-publik-seluler.jpeg`](docs/tahap3b-tunnel/01-akses-publik-seluler.jpeg) | 2026-11-19 |
-| **Tahap 4: Basisdata dan dashboard** (Data tersimpan di InfluxDB, tampil di Grafana, & aturan *Alert Suhu Tinggi* berstatus *Firing*) | • [`01-grafana-dashboard-aktif.png`](docs/tahap4-grafana-dashboard/01-grafana-dashboard-aktif.png)<br>• [`02-grafana-alert-dan-kueri-influxdb.png`](docs/tahap4-grafana-dashboard/02-grafana-alert-dan-kueri-influxdb.png) | 2026-11-19 |
+| **Tahap 1: RPI ke Internet** (`rpi-kel1` terhubung Pi Connect, konfigurasi IP, `ufw` aktif, dan uji `ping` berhasil) | • [`01-pi-connect-aktif.jpg`](docs/tahap1_rpi_piconnect/01-pi-connect-aktif.jpg)<br>• [`02-ip-address.png`](docs/tahap1_rpi_piconnect/02-ip-address.png)<br>• [`03-ufw-status.png`](docs/tahap1_rpi_piconnect/03-ufw-status.png)<br>• [`04-ping-internet.png`](docs/tahap1_rpi_piconnect/04-ping-internet.png) | 2026-11-12 |
+| **Tahap 2: Sensor ke RPI** (Rangkaian fisik DHT22 pada ESP32 & pembacaan stabil di Serial Monitor tanpa `nan`) | • [`01-rangkaian-esp32-dht22.jpeg`](docs/tahap2-sensor-esp32/01-rangkaian-esp32-dht22.jpeg)<br>• [`02-serial-monitor-ok.png`](docs/tahap2-sensor-esp32/02-serial-monitor-ok.png) | 2026-11-16 |
+| **Tahap 3a: Broker MQTT** (`mosquitto_sub -t 'iot/#'` menerima pesan JSON dari ESP32 dengan autentikasi user & password) | • [`01-mosquitto-sub-terima-data.jpeg`](docs/tahap3a-broker-mqtt/01-mosquitto-sub-terima-data.jpeg) | 2026-11-18 |
+| **Tahap 3b: Akses Internet** (URL publik Cloudflare Tunnel terbuka dari jaringan data seluler & wajib login) | • [`01-akses-publik-seluler.jpeg`](docs/tahap3b-tunnel/01-akses-publik-seluler.jpeg) | 2026-11-18 |
+| **Tahap 4: Basisdata dan dashboard** (Data tersimpan di InfluxDB, tampil di Grafana, & aturan *Alert Suhu Tinggi* berstatus *Firing*) | • [`01-grafana-dashboard-aktif.png`](docs/tahap4-grafana-dashboard/01-grafana-dashboard-aktif.png)<br>• [`02-grafana-alert-dan-kueri-influxdb.png`](docs/tahap4-grafana-dashboard/02-grafana-alert-dan-kueri-influxdb.png) | 2026-11-20 |
 
 ## Akses publik
 
