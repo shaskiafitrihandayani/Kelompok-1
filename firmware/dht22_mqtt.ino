@@ -7,11 +7,11 @@
 #define LED_BIRU 2     // LED biru bawaan board ESP32
 
 const char* ssid        = "paramadina_cikarang";
-const char* password    = "***";
+const char* password    = "WIFI_PASSWORD";
 const char* mqtt_server = "192.168.10.86";
 const int   mqtt_port   = 1883;
 const char* mqtt_user   = "esp32";
-const char* mqtt_pass   = "***";
+const char* mqtt_pass   = "MQTT_PASSWORD";
 const char* mqtt_topic  = "iot/kel1/dht22";
 
 DHT dht(DHTPIN, DHTTYPE);
