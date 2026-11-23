@@ -1,50 +1,31 @@
-# Changelog
+# Changelog - Kelompok 1
 
-Seluruh perubahan dan pencapaian penting dalam pengembangan sistem pemantau suhu dan kelembapan udara **Kelompok 1** dicatat pada berkas ini.
-
----
-
-## [1.0.0] - 2026-11-23 (Finalisasi Repositori & Dokumentasi UTS)
-
-### Ditambahkan
-* **Dokumentasi Utama (`README.md`):** Diagram arsitektur aliran data terpadu, tabel pembagian peran anggota, rincian langkah reproduksi instalasi, serta tabel kendala dan solusi (*troubleshooting*).
-* **Kode Firmware (`firmware/dht22_mqtt.ino`):** Kode pembacaan sensor DHT22 pada pin `GPIO4` (`D4`) dengan interval pengiriman 10 detik melalui protokol MQTT ke topik `iot/kel1/dht22`.
-* **Konfigurasi Server (`rpi/`):** Berkas konfigurasi broker `mosquitto.conf`, agen pengumpul data `telegraf.conf`, dan layanan *systemd* `cloudflared-tunnel.service`.
-* **Ekspor Dashboard (`dashboard/grafana-dashboard.json`):** Konfigurasi panel visualisasi *time series*, *gauge* suhu dan kelembapan, kueri Flux, serta aturan peringatan (*alert*).
-* **Bukti Pengujian (`docs/`):** Tangkapan layar verifikasi untuk seluruh tahapan pengujian (`tahap1-piconnect-ufw.png` hingga `tahap4-grafana-dashboard.png`).
-
-### Keamanan
-* Menstandarkan seluruh kredensial sensitif pada kode dan berkas konfigurasi publik menggunakan *placeholder* (`WIFI_PASSWORD`, `MQTT_PASSWORD`, dan `INFLUXDB_API_TOKEN`) untuk mencegah kebocoran data.
+Catatan perubahan konfigurasi sistem, firmware, dan dokumentasi oleh masing-masing peran (siapa, kapan, dan apa yang diubah).
 
 ---
 
-## [0.4.0] - 2026-11-20 (Tahap 4: Basis Data InfluxDB & Dashboard Grafana)
+### 2026-11-15 - Peran A (Naflah Keumala Zahwa)
+- Mengatur *hostname* Raspberry Pi menjadi `rpi-kel1` dan memperbarui sistem operasi Raspberry Pi OS (64-bit).
+- Mengonfigurasi autentikasi kunci SSH (`~/.ssh/authorized_keys`) untuk keamanan akses jarak jauh.
+- Mengaktifkan *firewall* UFW (`sudo ufw enable`) dengan hanya membuka akses SSH serta port lokal untuk layanan yang dibutuhkan.
+- Memastikan koneksi Internet Raspberry Pi stabil dan terhubung aktif melalui Raspberry Pi Connect.
 
-### Ditambahkan
-* Mengonfigurasi agen **Telegraf** untuk berlangganan topik MQTT `iot/kel1/dht22` dengan format payload JSON dan menyimpannya ke *bucket* `iot` pada **InfluxDB 2.x**.
-* Membangun dashboard pemantauan pada **Grafana** (`localhost:3000`) menggunakan kueri Flux serta mengaktifkan aturan peringatan (*alert*) apabila suhu melewati ambang batas yang ditentukan.
+### 2026-11-17 - Peran B (Dimas Saputra)
+- Merangkai sensor suhu dan kelembapan DHT22 ke pin `GPIO4`, `3V3`, dan `GND` pada board ESP32.
+- Menulis dan mengunggah firmware pembacaan sensor menggunakan pustaka `DHT sensor library` dan `PubSubClient` dengan interval pengiriman 10 detik.
+- Memverifikasi hasil pembacaan suhu (`°C`) dan kelembapan (`%`) pada Serial Monitor hingga stabil tanpa galat `nan`.
 
----
+### 2026-11-19 - Peran C (Luthfi Muhammad)
+- Menginstal broker MQTT Eclipse Mosquitto di Raspberry Pi, menonaktifkan akses anonim (`allow_anonymous false`), dan membuat kredensial khusus akun `esp32`.
+- Membuka *listener* MQTT port `1883` khusus jaringan lokal dan menguji penerimaan data JSON pada topik `iot/kel1/dht22` via `mosquitto_sub`.
+- Menyiapkan akses publik aman ke Grafana (port `3000`) menggunakan Cloudflare Tunnel (`cloudflared`) yang berjalan sebagai layanan `systemd`.
 
-## [0.3.0] - 2026-11-19 (Tahap 3a & 3b: Broker MQTT & Cloudflare Tunnel)
+### 2026-11-19 - Peran D (Shaskia Fitri Handayani)
+- Menginstal dan menjalankan InfluxDB 2.x serta membuat organisasi `paramadina`, *bucket* `iot`, dan token API khusus Telegraf.
+- Mengonfigurasi Telegraf (`mqtt_consumer`) untuk meneruskan payload JSON dari broker MQTT ke InfluxDB 2.x.
+- Membangun dashboard Grafana (panel *Time Series* dan *Gauge*), mengatur aturan peringatan **`Alert Suhu Tinggi`**, serta mengekspor konfigurasi ke `dashboard/grafana-dashboard.json`.
 
-### Ditambahkan
-* Mengaktifkan autentikasi pengguna (`esp32`) pada broker **Eclipse Mosquitto** (`port 1883`) dengan menonaktifkan akses anonim (`allow_anonymous false`).
-* Mengonfigurasi **Cloudflare Quick Tunnel** (`cloudflared`) sebagai layanan *systemd* untuk mengekspos layanan Grafana lokal (`http://localhost:3000`) ke alamat HTTPS publik dengan tetap mewajibkan login pengguna.
-
----
-
-## [0.2.0] - 2026-11-17 (Tahap 2: Integrasi Sensor DHT22 & Firmware ESP32)
-
-### Ditambahkan
-* Merangkai sensor **DHT22** ke **ESP32 DevKit** (`VCC` ke `3V3`, `DATA` ke `D4`/`GPIO4`, `GND` ke `GND`).
-* Mengunggah sketsa Arduino untuk koneksi WiFi kampus (`paramadina_cikarang`), indikator LED status koneksi, serta publikasi data JSON suhu dan kelembapan secara berkala.
-
----
-
-## [0.1.0] - 2026-11-05 (Tahap 1: Inisialisasi Raspberry Pi & Keamanan Dasar)
-
-### Ditambahkan
-* Instalasi **Raspberry Pi OS (64-bit)** menggunakan Raspberry Pi Imager dengan *hostname* `rpi-kel1`.
-* Mengaktifkan layanan *remote management* **Raspberry Pi Connect** untuk pengelolaan terminal dan desktop jarak jauh.
-* Mengonfigurasi *firewall* **UFW** agar hanya membuka port SSH dan port MQTT (`1883`) dari jaringan lokal kampus (`192.168.10.0/24`).
+### 2026-11-24 - Seluruh Anggota (Peran A, B, C, D)
+- Melakukan audit silang antarperan untuk menguji ulang setiap tahapan berdasarkan dokumentasi.
+- Menyensor seluruh kredensial sensitif (password WiFi, password MQTT, dan token API) pada kode maupun tangkapan layar.
+- Melengkapi seluruh bukti uji tiap tahap ke folder `docs/` serta menyusun `README.md`, `CHANGELOG.md`, dan `kontribusi.md`.
