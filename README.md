@@ -45,7 +45,7 @@ Sistem pemantau suhu dan kelembapan udara ini bekerja dalam satu rantai data ter
 
 - **Alamat dashboard:** [https://others-reality-displaying-show.trycloudflare.com](https://others-reality-displaying-show.trycloudflare.com)
 - **Jalur tunnel yang dipakai:** Cloudflare Tunnel (`cloudflared` dijalankan sebagai layanan `systemd` ke `http://localhost:3000`)
-- **Video demo:** `[drive]`
+- **Video demo:** [https://drive.google.com/drive/folders/1JiWHlNuWRyPyNFwHT6JhB12xxZJembk1](https://drive.google.com/drive/folders/1JiWHlNuWRyPyNFwHT6JhB12xxZJembk1)
 
 ## Kendala dan solusi
 
